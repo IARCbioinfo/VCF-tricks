@@ -27,6 +27,7 @@ cd ../htslib; make
 
 ### Two R functions to extract values from INFO or GENOTYPE fields 
 
+```R
 get_info=function(info,field,num=T) {
   get_single_info=function(single_info,field) { 
     grep_res=grep(paste("^",field,"=",sep=""),unlist(strsplit(single_info,";")),value=T)
@@ -44,3 +45,4 @@ get_genotype=function(genotype,format,field,num=T) {
   res=unlist(lapply(genotype,get_single_genotype,format,field))
   if (num) as.numeric(res) else res
 }
+```
