@@ -25,6 +25,14 @@ cd ../htslib; make
 
 ## Tip and tricks
 
+### Loading a VCF file as a data frame
+
+```R
+my_vcf=read.table(pipe("grep -v '^##' test.vcf | sed s/^#//"),stringsAsFactors=F,header=T,sep="\t")
+```
+
+Note that the header is ignored.
+
 ### Two R functions to extract values from INFO or GENOTYPE fields 
 
 ```R
@@ -46,3 +54,5 @@ get_genotype=function(genotype,format,field,num=T) {
   if (num) as.numeric(res) else res
 }
 ```
+
+Usage example:
