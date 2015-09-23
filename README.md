@@ -23,7 +23,7 @@ cd ../htslib; make
 - vt [wiki](http://genome.sph.umich.edu/wiki/Vt) and [github page](https://github.com/atks/vt)
 - bedtools [documentation](http://bedtools.readthedocs.org) and [github page](https://github.com/arq5x/bedtools2)
 
-## Tip and tricks
+## R Tip and tricks
 
 ### Loading a VCF file as a data frame
 
@@ -35,6 +35,43 @@ Note that the header is ignored.
 
 ### Two R functions to extract values from INFO or GENOTYPE fields 
 
-<script src="https://gist.github.com/mfoll/a4dfbb92068dc559f130.js"></script>
+Gist: https://gist.github.com/mfoll/a4dfbb92068dc559f130
+```
+get_info=function(info,field,num=T) {
+  get_single_info=function(single_info,field) { 
+    grep_res=grep(paste("^",field,"=",sep=""),unlist(strsplit(single_info,";")),value=T)
+    if (length(grep_res)>0) strsplit(grep_res,"=")[[1]][2] else NA
+  }
+  res=unlist(lapply(info,get_single_info,field))
+  if (num) as.numeric(res) else res
+}
 
-Usage example:
+get_genotype=function(genotype,format,field,num=T) {
+  get_single_genotype=function(single_genotype,format,field) { 
+    single_res=unlist(strsplit(single_genotype,":"))[which(unlist(strsplit(format,":"))==field)]
+    if (length(single_res)>0) single_res else NA
+  }
+  res=unlist(lapply(genotype,get_single_genotype,format,field))
+  if (num) as.numeric(res) else res
+}
+```
+
+### Get genotype columns and sample names:
+```R
+# list of columns containing sample specific data
+GT_cols=(which(names(data)=="FORMAT")+1):ncol(data)
+# extract sample names
+SM=names(data[,GT_cols])
+```
+
+### Using all the above
+- Extract only variants with `TYPE=snv` in INFO:
+
+  ```R
+  data[which(get_info(my_vcf$INFO,"TYPE",num=F)=="snv"),]
+  ```
+- Extract coverage of each sample at a given line (1 here):
+
+  ```R
+  get_genotype(my_vcf$INFO[1,GT_cols],my_vcf$INFO[1],"DP")
+  ```
