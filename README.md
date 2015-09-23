@@ -35,24 +35,6 @@ Note that the header is ignored.
 
 ### Two R functions to extract values from INFO or GENOTYPE fields 
 
-```R
-get_info=function(info,field,num=T) {
-  get_single_info=function(single_info,field) { 
-    grep_res=grep(paste("^",field,"=",sep=""),unlist(strsplit(single_info,";")),value=T)
-    if (length(grep_res)>0) strsplit(grep_res,"=")[[1]][2] else NA
-  }
-  res=unlist(lapply(info,get_single_info,field))
-  if (num) as.numeric(res) else res
-}
-
-get_genotype=function(genotype,format,field,num=T) {
-  get_single_genotype=function(single_genotype,format,field) { 
-    single_res=unlist(strsplit(single_genotype,":"))[which(unlist(strsplit(format,":"))==field)]
-    if (length(single_res)>0) single_res else NA
-  }
-  res=unlist(lapply(genotype,get_single_genotype,format,field))
-  if (num) as.numeric(res) else res
-}
-```
+<script src="https://gist.github.com/mfoll/a4dfbb92068dc559f130.js"></script>
 
 Usage example:
