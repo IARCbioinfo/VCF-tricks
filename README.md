@@ -36,7 +36,7 @@ Note that the header is ignored.
 ### Two R functions to extract values from INFO or GENOTYPE fields 
 
 Gist: https://gist.github.com/mfoll/a4dfbb92068dc559f130
-```
+```R
 get_info=function(info,field,num=T) {
   get_single_info=function(single_info,field) { 
     grep_res=grep(paste("^",field,"=",sep=""),unlist(strsplit(single_info,";")),value=T)
