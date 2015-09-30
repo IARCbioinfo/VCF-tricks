@@ -69,7 +69,7 @@ SM=names(my_vcf)[GT_cols]
 ```
 
 ### Using all the above
-This assumes that you have a `my_vcf` data frame loaded and the two function above.
+This assumes that you have a `my_vcf` data frame loaded, the two functions above and the objects `GT_cols` and `SM`.
 
 - Extract the variant type (`TYPE`) from all lines from the INFO field:
   
@@ -93,3 +93,11 @@ This assumes that you have a `my_vcf` data frame loaded and the two function abo
   get_genotype(my_vcf[,"MY_SAMPLE"],my_vcf$FORMAT[1],"DP")
   ```
 You can replace `"MY_SAMPLE"` with `SM[1]` to take the first sample without typing manually its name (usefull if you have only one for example).
+
+- Plot the distribution of allelic fraction from the first sample (assuming `AO` and `DP` fields are available in the genotype column):
+
+  ```R
+  AO=get_genotype(my_vcf[,SM[1]],my_vcf$FORMAT[1],"AO")
+  DP=get_genotype(my_vcf[,SM[1]],my_vcf$FORMAT[1],"DP")
+  hist(AO/DP)
+```
