@@ -65,7 +65,7 @@ Both function are vectorized (i.e. you can give them a vector of `INFO` fields o
 # list of columns containing sample specific data
 GT_cols=(which(names(my_vcf)=="FORMAT")+1):ncol(my_vcf)
 # extract sample names
-SM=names(my_vcf[,GT_cols])
+SM=names(my_vcf)[GT_cols]
 ```
 
 ### Using all the above
@@ -92,4 +92,4 @@ This assumes that you have a `my_vcf` data frame loaded and the two function abo
   ```R
   get_genotype(my_vcf[,"MY_SAMPLE"],my_vcf$FORMAT[1],"DP")
   ```
-You can replace `"MY_SAMPLE"` with `SM[1]` to take the first sample without typing manually its name.
+You can replace `"MY_SAMPLE"` with `SM[1]` to take the first sample without typing manually its name (usefull if you have only one for example).
