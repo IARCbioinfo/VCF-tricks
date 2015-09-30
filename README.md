@@ -63,9 +63,9 @@ Both function are vectorized (i.e. you can give them a vector of `INFO` fields o
 ### Get genotype columns and sample names:
 ```R
 # list of columns containing sample specific data
-GT_cols=(which(names(data)=="FORMAT")+1):ncol(data)
+GT_cols=(which(names(my_vcf)=="FORMAT")+1):ncol(my_vcf)
 # extract sample names
-SM=names(data[,GT_cols])
+SM=names(my_vcf[,GT_cols])
 ```
 
 ### Using all the above
@@ -79,7 +79,7 @@ This assumes that you have a `my_vcf` data frame loaded and the two function abo
 - Use it to fikter only variants with `TYPE=snv`:
 
   ```R
-  data[which(get_info(my_vcf$INFO,"TYPE",num=F)=="snv"),]
+  my_vcf[which(get_info(my_vcf$INFO,"TYPE",num=F)=="snv"),]
   ```
 - Extract coverage (`DP`) of each sample at a given line (1 here):
 
