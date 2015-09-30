@@ -23,7 +23,7 @@ cd ../htslib; make
 - vt [wiki](http://genome.sph.umich.edu/wiki/Vt) and [github page](https://github.com/atks/vt)
 - bedtools [documentation](http://bedtools.readthedocs.org) and [github page](https://github.com/arq5x/bedtools2)
 
-## R Tip and tricks
+## Manually processing VCF in R
 
 ### Loading a VCF file as a data frame
 On Unix systems (Mac or Linux), automatically pipe it with `grep` and `sed` to remove the header.
