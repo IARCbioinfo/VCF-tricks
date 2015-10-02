@@ -101,3 +101,25 @@ You can replace `"MY_SAMPLE"` with `SM[1]` to take the first sample without typi
   DP=get_genotype(my_vcf[,SM[1]],my_vcf$FORMAT[1],"DP")
   hist(AO/DP)
 ```
+
+## Manually processing VCF in bash
+
+### Split a n-samples VCF 
+
+-This bash script splits a big VCF from n samples into n VCF with file name = sample name (save these lines into big_VCF_to_samples.sh)
+
+```bash
+#!/bin/bash 
+
+if [ $# -eq 0 ]; then #if no provided parameters
+  echo 'usage : ./big_VCF_to_samples.sh <input big VCF> <result folder>'
+else
+  mkdir -p $2
+  IFS= read -a array <<< $(grep "#CHROM" $1 | awk '{for(i=10;i<=NF;++i)print $i}')
+  samples=${array[0]}
+  for i in `seq 1 $(echo "$samples" | wc -w)`;
+  do
+    bcftools view -s $(echo "$samples" | cut -d" " -f$i) $1 > $2"/"$(echo "$samples" | cut -d" " -f$i).vcf
+  done
+fi
+```
