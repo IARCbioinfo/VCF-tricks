@@ -1,4 +1,8 @@
-# Tip and tricks for VCF files
+# Tip and tricks for VCF files - Summary 
+
+- [Usefull tools](https://github.com/IARC-bioinfo/VCF-tricks#usefull-tools)
+- [Manually processing VCF in R](https://github.com/IARC-bioinfo/VCF-tricks#manually-processing-vcf-in-r)
+- [Manually processing VCF in bash](https://github.com/IARC-bioinfo/VCF-tricks#manually-processing-vcf-in-bash) 
 
 ## Usefull tools
 ### Samtools organisation and repositories
