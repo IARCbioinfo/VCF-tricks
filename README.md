@@ -1,8 +1,15 @@
 # Tip and tricks for VCF files - Summary 
 
 - [Usefull tools](https://github.com/IARC-bioinfo/VCF-tricks#usefull-tools)
+ - [Samtools organisation and repositories](https://github.com/IARC-bioinfo/VCF-tricks#samtools-organisation-and-repositories) 
+ - [Other tools](https://github.com/IARC-bioinfo/VCF-tricks#other-tools)
 - [Manually processing VCF in R](https://github.com/IARC-bioinfo/VCF-tricks#manually-processing-vcf-in-r)
+ - [Loading a VCF file as a data frame](https://github.com/IARC-bioinfo/VCF-tricks#loading-a-vcf-file-as-a-data-frame)
+ - [Extract values from INFO or GENOTYPE](https://github.com/IARC-bioinfo/VCF-tricks#two-r-functions-to-extract-values-from-info-or-genotype-fields)
+ - [Get genotype and sample names](https://github.com/IARC-bioinfo/VCF-tricks#get-genotype-columns-and-sample-names)
+ - [Using all the above](https://github.com/IARC-bioinfo/VCF-tricks#using-all-the-above)
 - [Manually processing VCF in bash](https://github.com/IARC-bioinfo/VCF-tricks#manually-processing-vcf-in-bash) 
+ - [Split a n-samples VCF](https://github.com/IARC-bioinfo/VCF-tricks#split-a-n-samples-vcf) 
 
 ## Usefull tools
 ### Samtools organisation and repositories
