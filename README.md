@@ -1,4 +1,4 @@
-# Tip and tricks for VCF files - Summary 
+# Tip and tricks for VCF files 
 
 - [Usefull tools](https://github.com/IARC-bioinfo/VCF-tricks#usefull-tools)
  - [Samtools organisation and repositories](https://github.com/IARC-bioinfo/VCF-tricks#samtools-organisation-and-repositories) 
