@@ -55,9 +55,9 @@ Here it's called `DP_T`and filled with `.` (dot represent missing values in VCF 
 ```R
 library(VariantAnnotation)
 vcf <- readVcf("test.vcf", "hg19")
-newInfo <- DataFrame(Number=1, Type="Integer",Description="DP in tumor",row.names="DP_T")
+newInfo <- DataFrame(Number=1, Type="Integer",Description="DP in normal",row.names="DP_N")
 info(header(vcf)) <- rbind(info(header(vcf)), newInfo)
-info(vcf)$DP_T="."
+info(vcf)$DP_N="."
 writeVcf(vcf,"test.vcf")
 ```
 
