@@ -3,6 +3,7 @@
 - [Usefull tools](https://github.com/IARC-bioinfo/VCF-tricks#usefull-tools)
  - [Samtools organisation and repositories](https://github.com/IARC-bioinfo/VCF-tricks#samtools-organisation-and-repositories) 
  - [Other tools](https://github.com/IARC-bioinfo/VCF-tricks#other-tools)
+- [Use R VariantAnnotation bioconductor package](https://github.com/IARC-bioinfo/VCF-tricks#other-tools) 
 - [Manually processing VCF in R](https://github.com/IARC-bioinfo/VCF-tricks#manually-processing-vcf-in-r)
  - [Loading a VCF file as a data frame](https://github.com/IARC-bioinfo/VCF-tricks#loading-a-vcf-file-as-a-data-frame)
  - [Extract values from INFO or GENOTYPE](https://github.com/IARC-bioinfo/VCF-tricks#two-r-functions-to-extract-values-from-info-or-genotype-fields)
@@ -35,6 +36,28 @@ cd ../htslib; make
 - bedtools [documentation](http://bedtools.readthedocs.org) and [github page](https://github.com/arq5x/bedtools2)
 - PyVCF [github page](https://github.com/jamescasbon/PyVCF)
 - VCFtools [webpage](https://vcftools.github.io/) and [github page](https://github.com/vcftools/vcftools). It has been mostly replaced with bcftools but some commands are still only available in VCFtools (in particular [vcf-annotate](https://vcftools.github.io/perl_module.html#vcf-annotate))
+
+## Use R VariantAnnotation bioconductor package
+
+### Replace INFO/DP field with GENO/DP field
+```R
+library(VariantAnnotation)
+vcf <- readVcf("test.vcf", "hg19")
+info(vcf)$DP=geno(vcf)$DP
+writeVcf(vcf,"test.vcf")
+```
+
+### Create a new INFO field
+
+Here it's called `DP_T`and filled with `.` (dot represent missing values in VCF files) but it could be anything you like.
+```R
+library(VariantAnnotation)
+vcf <- readVcf("test.vcf", "hg19")
+newInfo <- DataFrame(Number=1, Type="Integer",Description="DP in tumor",row.names="DP_T")
+info(header(vcf)) <- rbind(info(header(vcf)), newInfo)
+info(vcf)$DP_T="."
+writeVcf(vcf,"test.vcf")
+```
 
 ## Manually processing VCF in R
 
