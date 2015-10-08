@@ -33,7 +33,8 @@ cd ../htslib; make
 - vcflib [github page](https://github.com/ekg/vcflib)
 - vt [wiki](http://genome.sph.umich.edu/wiki/Vt) and [github page](https://github.com/atks/vt)
 - bedtools [documentation](http://bedtools.readthedocs.org) and [github page](https://github.com/arq5x/bedtools2)
-
+- PyVCF [github page](https://github.com/jamescasbon/PyVCF)
+- VCFtools [webpage](https://vcftools.github.io/) and [github page](https://github.com/vcftools/vcftools). It has been mostly replaced with bcftools but some commands are still only available in VCFtools (in particular [vcf-annotate](https://vcftools.github.io/perl_module.html#vcf-annotate))
 ## Manually processing VCF in R
 
 ### Loading a VCF file as a data frame
