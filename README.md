@@ -145,6 +145,7 @@ You can replace `"MY_SAMPLE"` with `SM[1]` to take the first sample without typi
 
 -This bash script splits a big VCF from n samples into n VCF with file name = sample name (save these lines into big_VCF_to_samples.sh)
 
+Gist : https://gist.github.com/tdelhomme/cb28dec176b55c43e887
 ```bash
 #!/bin/bash 
 
