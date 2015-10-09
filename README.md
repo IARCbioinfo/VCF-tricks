@@ -41,9 +41,10 @@ cd ../htslib; make
 
 ## Use R VariantAnnotation bioconductor package
 
+All the commands below assume the package `VariantAnnotation` has been loaded into R using `library(VariantAnnotation)`.
+
 ### Replace INFO/DP field with GENO/DP field
 ```R
-library(VariantAnnotation)
 vcf <- readVcf("test.vcf", "hg19")
 info(vcf)$DP=geno(vcf)$DP
 writeVcf(vcf,"test.vcf")
@@ -53,12 +54,19 @@ writeVcf(vcf,"test.vcf")
 
 Here it's called `DP_T`and filled with `.` (dot represent missing values in VCF files) but it could be anything you like.
 ```R
-library(VariantAnnotation)
 vcf <- readVcf("test.vcf", "hg19")
 newInfo <- DataFrame(Number=1, Type="Integer",Description="DP in normal",row.names="DP_N")
 info(header(vcf)) <- rbind(info(header(vcf)), newInfo)
 info(vcf)$DP_N="."
 writeVcf(vcf,"test.vcf")
+```
+
+### Split a multi-sample VCF into n-single sample VCFs
+```R
+vcf_file = "test.vcf"
+for (cur_sample in samples(scanVcfHeader(vcf_file))) {
+  writeVcf(readVcf(vcf_file, "hg19",ScanVcfParam(sample = cur_sample)),paste(cur_sample,".vcf",sep = ""))
+}
 ```
 
 ## Manually processing VCF in R
