@@ -62,6 +62,8 @@ for (cur_sample in samples(scanVcfHeader(vcf_file))) {
 
 ## Manually processing VCF in R
 
+Look at these functions too: https://github.com/sahilseth/vcfparser
+
 ### Loading a VCF file as a data frame
 On Unix systems (Mac or Linux), automatically pipe it with `grep` and `sed` to remove the header.
 ```R
@@ -143,7 +145,7 @@ You can replace `"MY_SAMPLE"` with `SM[1]` to take the first sample without typi
 
 ### Split a n-samples VCF 
 
--This bash script splits a big VCF from n samples into n VCF with file name = sample name (save these lines into big_VCF_to_samples.sh)
+This bash script splits a big VCF from n samples into n VCF with file name = sample name (save these lines into big_VCF_to_samples.sh)
 
 Gist : https://gist.github.com/tdelhomme/cb28dec176b55c43e887
 ```bash
