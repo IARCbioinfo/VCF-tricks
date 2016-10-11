@@ -155,7 +155,7 @@ if [ $# -eq 0 ]; then #if no provided parameters
   echo 'usage : ./big_VCF_to_samples.sh <input big VCF> <result folder>'
 else
   mkdir -p $2
-  IFS= read -a array <<< $(grep "#CHROM" $1 | awk '{for(i=10;i<=NF;++i)print $i}')
+  IFS= read -a array <<< $(grep "#CHROM" $1 | head -1 | awk '{for(i=10;i<=NF;++i)print $i}')
   samples=${array[0]}
   for i in `seq 1 $(echo "$samples" | wc -w)`;
   do
