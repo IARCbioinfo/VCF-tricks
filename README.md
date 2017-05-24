@@ -139,7 +139,8 @@ You can replace `"MY_SAMPLE"` with `SM[1]` to take the first sample without typi
   AO=get_genotype(my_vcf[,SM[1]],my_vcf$FORMAT[1],"AO")
   DP=get_genotype(my_vcf[,SM[1]],my_vcf$FORMAT[1],"DP")
   hist(AO/DP)
-```
+  ```
+
 
 ## Manually processing VCF in bash
 
@@ -162,4 +163,9 @@ else
     bcftools view -s $(echo "$samples" | cut -d" " -f$i) $1 > $2"/"$(echo "$samples" | cut -d" " -f$i).vcf
   done
 fi
+```
+
+### Generate a sorted and merged BED file from positions in a VCF
+```
+awk '{ if (!/^#/) print $1"	"$2"	"$2}' input.vcf | sort -k1,1 -k2,2n | bedtools merge -i stdin
 ```
