@@ -167,5 +167,5 @@ fi
 
 ### Generate a sorted and merged BED file from positions in a VCF
 ```
-awk '{ if (!/^#/) print $1"	"$2"	"$2}' input.vcf | sort -k1,1 -k2,2n | bedtools merge -i stdin
+awk '{ if (!/^#/) print $1"	"$2"	"$2+1}' input.vcf | sort -k1,1 -k2,2n | bedtools merge -i stdin
 ```
