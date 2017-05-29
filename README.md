@@ -169,3 +169,8 @@ fi
 ```
 awk '{ if (!/^#/) print $1"	"$2"	"$2+1}' input.vcf | sort -k1,1 -k2,2n | bedtools merge -i stdin
 ```
+
+### Compute number of positions in a bed file
+```
+cat mybedfile.bed | awk -F'\t' 'BEGIN{SUM=0}{ SUM+=$3-$2+1 }END{print SUM}'
+```
