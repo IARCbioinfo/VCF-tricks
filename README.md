@@ -174,3 +174,8 @@ awk '{ if (!/^#/) print $1"	"$2"	"$2+1}' input.vcf | sort -k1,1 -k2,2n | bedtool
 ```
 cat mybedfile.bed | awk -F'\t' 'BEGIN{SUM=0}{ SUM+=$3-$2+1 }END{print SUM}'
 ```
+
+### Get the samples ID from a VCF
+```
+grep "^#CHROM" input.vcf | tr '\t' '\n' | grep -v -E '#CHROM|POS|ID|REF|ALT|QUAL|FILTER|INFO|FORMAT'
+```
