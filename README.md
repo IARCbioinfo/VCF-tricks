@@ -1,9 +1,9 @@
-# Tip and tricks for VCF files 
+# Tip and tricks for VCF files
 
 - [Usefull tools](https://github.com/IARC-bioinfo/VCF-tricks#usefull-tools)
 - [Use R VariantAnnotation bioconductor package](https://github.com/IARC-bioinfo/VCF-tricks#use-r-variantannotation-bioconductor-package)
 - [Manually processing VCF in R](https://github.com/IARC-bioinfo/VCF-tricks#manually-processing-vcf-in-r)
-- [Manually processing VCF in bash](https://github.com/IARC-bioinfo/VCF-tricks#manually-processing-vcf-in-bash) 
+- [Manually processing VCF in bash](https://github.com/IARC-bioinfo/VCF-tricks#manually-processing-vcf-in-bash)
 
 ## Usefull tools
 ### Samtools organisation and repositories
@@ -74,12 +74,12 @@ On Windows, you can manually remove the header lines (starting with `##`) and al
 my_vcf=read.table("test_noheader.vcf",stringsAsFactors=F,header=T,sep="\t")
 ```
 
-### Two R functions to extract values from INFO or GENOTYPE fields 
+### Two R functions to extract values from INFO or GENOTYPE fields
 
 Gist: https://gist.github.com/mfoll/a4dfbb92068dc559f130
 ```R
 get_info=function(info,field,num=T) {
-  get_single_info=function(single_info,field) { 
+  get_single_info=function(single_info,field) {
     grep_res=grep(paste("^",field,"=",sep=""),unlist(strsplit(single_info,";")),value=T)
     if (length(grep_res)>0) strsplit(grep_res,"=")[[1]][2] else NA
   }
@@ -88,7 +88,7 @@ get_info=function(info,field,num=T) {
 }
 
 get_genotype=function(genotype,format,field,num=T) {
-  get_single_genotype=function(single_genotype,format,field) { 
+  get_single_genotype=function(single_genotype,format,field) {
     single_res=unlist(strsplit(single_genotype,":"))[which(unlist(strsplit(format,":"))==field)]
     if (length(single_res)>0) single_res else NA
   }
@@ -111,7 +111,7 @@ SM=names(my_vcf)[GT_cols]
 This assumes that you have a `my_vcf` data frame loaded, the two functions above and the objects `GT_cols` and `SM`.
 
 - Extract the variant type (`TYPE`) from all lines from the INFO field:
-  
+
   ```R
   get_info(my_vcf$INFO,"TYPE",num=F)
   ```
@@ -125,7 +125,7 @@ This assumes that you have a `my_vcf` data frame loaded, the two functions above
   ```R
   get_genotype(my_vcf[1,GT_cols],my_vcf$FORMAT[1],"DP")
   ```
-  
+
 - Extract coverage of all lines of a given sample (`MY_SAMPLE` here):
 
   ```R
@@ -141,16 +141,24 @@ You can replace `"MY_SAMPLE"` with `SM[1]` to take the first sample without typi
   hist(AO/DP)
   ```
 
+### Built a TSV file, from VCF to extract a particular field from FORMAT
+
+[extract_FORMAT_vcf.r]() is a script which extract, for each variant in the VCF, and for each sample, the value of a `field` in `FORMAT`.  
+Example of command line:
+```
+Rscript extract_FORMAT_vcf.r --input_vcf=testepic.vcf.gz --field=DS
+```
+
 
 ## Manually processing VCF in bash
 
-### Split a n-samples VCF 
+### Split a n-samples VCF
 
 This bash script splits a big VCF from n samples into n VCF with file name = sample name (save these lines into big_VCF_to_samples.sh)
 
 Gist : https://gist.github.com/tdelhomme/cb28dec176b55c43e887
 ```bash
-#!/bin/bash 
+#!/bin/bash
 
 if [ $# -eq 0 ]; then #if no provided parameters
   echo 'usage : ./big_VCF_to_samples.sh <input big VCF> <result folder>'
