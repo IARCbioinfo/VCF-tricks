@@ -143,7 +143,7 @@ You can replace `"MY_SAMPLE"` with `SM[1]` to take the first sample without typi
 
 ### Built a TSV file, from VCF to extract a particular field from FORMAT
 
-[extract_FORMAT_vcf.r]() is a script which extract, for each variant in the VCF, and for each sample, the value of a `field` in `FORMAT`.  
+[extract_FORMAT_vcf.r](https://github.com/IARCbioinfo/VCF-tricks/blob/master/code/extract_FORMAT_vcf.r) is a script which extract, for each variant in the VCF, and for each sample, the value of a `field` in `FORMAT`.  
 Example of command line:
 ```
 Rscript extract_FORMAT_vcf.r --input_vcf=testepic.vcf.gz --field=DS
