@@ -13,7 +13,11 @@ if(is.null(args$nb_mut))               {nb_mut = 1000000} else {nb_mut = as.nume
 
 vcf <- open(VcfFile(input_vcf,  yieldSize=nb_mut))
 vcf_chunk = readVcf(vcf, "hg19")
+`#CHR` = as.character(seqnames(rowRanges(vcf_chunk)))
+`#START` = start(ranges(rowRanges(vcf_chunk,"seqnames")))
+`#REF` = as.character(rowRanges(vcf_chunk)$REF)
+`#ALT` = as.character(unlist(rowRanges(vcf_chunk)$ALT))
 
-res_matrix = t(geno(vcf_chunk, field))
+res_matrix = rbind(`#CHR`, `#START`, `#REF`, `#ALT`, t(geno(vcf_chunk, field)))
 
-write.table(data.frame("SAMPLE" = rownames(res_matrix),res_matrix, check.names = F), file = out_txt, row.names=FALSE, sep="\t", quote = F)
+write.table(data.frame("." = rownames(res_matrix), res_matrix, check.names = F), file = out_txt, row.names=FALSE, sep="\t", quote = F)
