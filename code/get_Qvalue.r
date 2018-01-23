@@ -8,6 +8,7 @@
 toQvalue <- function(vcf_chunk, sm, mut){
   id_sm = which(colnames(geno(vcf_chunk,"GT"))==sm)
   id_mut = which(rownames(geno(vcf_chunk,"GT"))==mut)
+  if(isEmpty(id_mut)) return(0)
   mu_est = info(vcf_chunk[id_mut,])$ERR
   sig_est = info(vcf_chunk[id_mut,])$SIG
   all_DP = unlist(as.list(geno(vcf_chunk[id_mut,],"DP")))
