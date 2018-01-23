@@ -67,7 +67,7 @@ Look at these functions too: https://github.com/sahilseth/vcfparser
 ### Extract expected Q-value from a needlestack calling
 Once a needlestack calling has been launch, user can want to compute what would be the Q-value of a particular sample at a particular position.
 This could help controlling the false negative rate.  
-Given a VCF chunk from [VariantAnnotation]() library, a sample ID and a particular mutation, [this]() function extract the corresponding Q-value.
+Given a VCF chunk from [VariantAnnotation](https://bioconductor.org/packages/release/bioc/html/VariantAnnotation.html) bioconductor package, a sample ID and a particular mutation, [this](https://github.com/IARCbioinfo/VCF-tricks/blob/master/code/get_Qvalue.r) function extract the corresponding Q-value.
 
 ### Loading a VCF file as a data frame
 On Unix systems (Mac or Linux), automatically pipe it with `grep` and `sed` to remove the header.
