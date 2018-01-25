@@ -113,6 +113,8 @@ SM=names(my_vcf)[GT_cols]
 ```
 
 ### Get number of variants for each position in a VCF file
+Following function returns, for each position in the input VCF file, the number of samples having a `QVALUE` higher than the input threshold (`QVAL_thr`, default=50), __i.e__. the number of variants.  
+
 ```R
 # after reading a VCF with read.table(), see last example
 get_number_of_variants <- function(vcf, QVAL_thr = 50){
@@ -122,7 +124,6 @@ get_number_of_variants <- function(vcf, QVAL_thr = 50){
     sum(all_QVAL>=QVAL_thr)
   }))
 }
-
 ```
 
 ### Using all the above
