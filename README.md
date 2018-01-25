@@ -112,6 +112,19 @@ GT_cols=(which(names(my_vcf)=="FORMAT")+1):ncol(my_vcf)
 SM=names(my_vcf)[GT_cols]
 ```
 
+### Get number of variants for each position in a VCF file
+```R
+# after reading a VCF with read.table(), see last example
+get_number_of_variants <- function(vcf, QVAL_thr = 50){
+  unlist(lapply(1:nrow(vcf), function(i) {
+    all_QVAL = unlist(lapply((which(colnames(vcf)=="FORMAT")+1) : ncol(vcf),
+                             function(id) get_genotype(vcf[i,id], vcf[i,"FORMAT"], field = "QVAL") ))
+    sum(all_QVAL>=QVAL_thr)
+  }))
+}
+
+```
+
 ### Using all the above
 This assumes that you have a `my_vcf` data frame loaded, the two functions above and the objects `GT_cols` and `SM`.
 
