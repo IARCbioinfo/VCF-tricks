@@ -210,5 +210,5 @@ grep "^#CHROM" input.vcf | tr '\t' '\n' | grep -v -E '#CHROM|POS|ID|REF|ALT|QUAL
 ### Downsample a VCF
 Here a zipped one (assuming the header is less than 10000 lines), from which we randomly extract 1 million lines:
 ```
-(zcat human_9606_b150_GRCh38p7.vcf.gz | head -n 10000 | zgrep ^# ; zgrep -v ^# human_9606_b150_GRCh38p7.vcf.gz | shuf -n 1000000)  > human_9606_b150_GRCh38p7_small.vcf.gz
+(zcat human_9606_b150_GRCh38p7.vcf.gz | head -n 10000 | zgrep ^# ; zgrep -v ^# human_9606_b150_GRCh38p7.vcf.gz | shuf -n 1000000) | gzip > human_9606_b150_GRCh38p7_small.vcf.gz
 ```
